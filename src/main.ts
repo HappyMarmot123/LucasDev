@@ -280,8 +280,8 @@ app.innerHTML = `
     <section class="steps-section section-pad" id="experience" data-steps-pin aria-labelledby="experience-title">
       <div class="steps-pin-inner">
         <div class="section-heading">
-          <p class="section-label" data-reveal>${t.experience.label}</p>
-          <h2 id="experience-title" data-reveal><span>${t.experience.titleA}</span><span>${t.experience.titleB}</span></h2>
+          <p class="section-kicker" data-reveal>${t.experience.label}</p>
+          <h2 id="experience-title" data-reveal><span>${t.experience.titleA}${t.experience.titleB}</span></h2>
           <p class="section-intro" data-reveal>${t.experience.intro}</p>
         </div>
         <div class="steps-grid">
@@ -308,10 +308,9 @@ app.innerHTML = `
       <div class="accent-glow accent-glow--industry" aria-hidden="true"></div>
       <div class="industries-head">
         <div class="section-heading" data-reveal>
-          <p class="section-label">${t.projects.label}</p>
+          <p class="section-kicker">${t.projects.label}</p>
           <h2 id="projects-title">
-            <span>${t.projects.titleA}</span>
-            ${t.projects.titleB ? `<span>${t.projects.titleB}</span>` : ''}
+            <span>${t.projects.title}</span>
           </h2>
           <div class="industries-copy">
             <p>${t.projects.intro}</p>
@@ -327,7 +326,7 @@ app.innerHTML = `
 
     <section class="cta-section section-pad" id="contact" aria-labelledby="contact-title">
       <div class="cta-main" data-reveal>
-        <p class="section-label">${t.cta.label}</p>
+        <p class="section-kicker">${t.cta.label}</p>
         <h2 id="contact-title">${t.cta.title}</h2>
         <div class="cta-body">
           <div>

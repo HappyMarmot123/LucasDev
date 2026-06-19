@@ -33,6 +33,11 @@
   --bg-wine-700: #5b122d;
   --bg-wine-600: #68172e;
   --bg-wine-500: #771f31;
+  --join-hero-profile: var(--bg-wine-800);
+  --join-profile-steps: var(--bg-wine-700);
+  --join-steps-marquee: var(--bg-wine-800);
+  --join-industry-cta: var(--bg-wine-800);
+  --join-cta-footer: #250412;
   --glow-red: rgb(225 73 72 / 28%);
   --glow-orange: rgb(227 75 58 / 40%);
   --glow-soft: rgb(255 255 255 / 12%);
@@ -54,7 +59,7 @@
 
   body {
     margin: 0;
-    background-color: var(--color-brown);
+    background-color: var(--bg-wine-800);
     color: var(--color-white);
     font-family: var(--font-body);
     overflow-x: hidden;
@@ -623,8 +628,9 @@
   min-height: 100vh;
   overflow: hidden;
   background:
-    linear-gradient(180deg, rgb(244 244 244 / 2%), rgb(244 244 244 / 6%)),
-    var(--color-brown);
+    radial-gradient(circle at 10% 78%, rgb(151 73 78 / 10%), transparent 22rem),
+    linear-gradient(180deg, rgb(244 244 244 / 2%), rgb(244 244 244 / 4%)),
+    linear-gradient(180deg, var(--join-steps-marquee) 0%, var(--join-industry-cta) 72%, var(--join-industry-cta) 100%);
 }
 
 .industry-showcase-swiper {
@@ -753,11 +759,12 @@
 }
 
 .steps-section {
+  position: relative;
   background:
-    radial-gradient(circle at 18% 0%, rgb(255 255 255 / 6%), transparent 16rem),
-    radial-gradient(circle at 72% 18%, rgb(175 98 103 / 25%), transparent 28rem),
-    radial-gradient(circle at 28% 100%, rgb(227 75 58 / 22%), transparent 29rem),
-    linear-gradient(135deg, #4b0b22 0%, var(--bg-wine-800) 54%, var(--bg-wine-700) 100%);
+    radial-gradient(circle at 18% 18%, rgb(255 255 255 / 4%), transparent 16rem),
+    radial-gradient(circle at 72% 28%, rgb(175 98 103 / 14%), transparent 28rem),
+    radial-gradient(circle at 28% 100%, rgb(227 75 58 / 14%), transparent 29rem),
+    linear-gradient(180deg, var(--join-profile-steps) 0%, var(--join-steps-marquee) 100%);
 }
 
 .steps-pin-inner {
@@ -782,8 +789,15 @@
   border: 1px solid rgb(255 255 255 / 13%);
   border-radius: 2rem;
   background:
-    radial-gradient(circle at 50% 45%, rgb(175 98 103 / 46%), transparent 12rem),
-    linear-gradient(145deg, rgb(255 255 255 / 10%), rgb(255 255 255 / 3%));
+    radial-gradient(circle at 50% 45%, rgb(255 255 255 / 10%), transparent 13rem),
+    linear-gradient(145deg, rgb(255 255 255 / 12%), rgb(255 255 255 / 4%)),
+    rgb(18 2 8 / 16%);
+  box-shadow:
+    0.9rem 1.1rem 2.4rem rgb(18 2 8 / 20%),
+    inset 0 1px 0 rgb(255 255 255 / 12%),
+    inset 0 -1px 0 rgb(60 9 30 / 28%);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
   overflow: hidden;
 }
 
@@ -832,27 +846,59 @@
 }
 
 .step-card {
+  position: relative;
   display: grid;
   grid-template-columns: 5.5rem 1fr;
   gap: 1.2rem;
   min-height: 15rem;
   padding: clamp(1.2rem, 2vw, 2rem);
-  border: 1px solid rgb(255 255 255 / 12%);
+  border: 1px solid rgb(255 255 255 / 20%);
   border-radius: 1.5rem;
-  background: rgb(255 255 255 / 4%);
-  opacity: 0.48;
-  transition: opacity 220ms ease, border-color 220ms ease, background 220ms ease, transform 220ms ease;
+  background:
+    radial-gradient(circle at 18% 0%, rgb(255 255 255 / 10%), transparent 12rem),
+    linear-gradient(145deg, rgb(255 255 255 / 13%), rgb(255 255 255 / 5%)),
+    rgb(18 2 8 / 14%);
+  box-shadow:
+    0.9rem 1.1rem 2.2rem rgb(18 2 8 / 18%),
+    -0.3rem -0.35rem 1rem rgb(255 255 255 / 5%),
+    inset 0 1px 0 rgb(255 255 255 / 14%),
+    inset 0 -1px 0 rgb(60 9 30 / 28%);
+  opacity: 0.86;
+  overflow: hidden;
+  transition: opacity 220ms ease, border-color 220ms ease, background 220ms ease, transform 220ms ease, box-shadow 220ms ease;
+}
+
+.step-card::before {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 0.18rem;
+  background: linear-gradient(180deg, rgb(255 255 255 / 36%), transparent);
+  opacity: 1;
+  content: '';
 }
 
 .step-card.is-active {
-  border-color: rgb(175 98 103 / 74%);
-  background: linear-gradient(145deg, rgb(175 98 103 / 18%), rgb(255 255 255 / 5%));
+  border-color: rgb(255 255 255 / 34%);
+  background:
+    radial-gradient(circle at 18% 0%, rgb(255 255 255 / 16%), transparent 12rem),
+    linear-gradient(145deg, rgb(255 255 255 / 18%), rgb(255 255 255 / 7%)),
+    rgb(18 2 8 / 18%);
+  box-shadow:
+    1rem 1.2rem 2.5rem rgb(18 2 8 / 22%),
+    -0.35rem -0.4rem 1.1rem rgb(255 255 255 / 8%),
+    inset 0 1px 0 rgb(255 255 255 / 20%),
+    inset 0 -1px 0 rgb(60 9 30 / 28%);
   opacity: 1;
-  transform: translateX(-0.45rem);
+  transform: translateX(-0.45rem) translateY(-0.12rem);
+}
+
+.step-card.is-active::before {
+  width: 0.24rem;
+  background: linear-gradient(180deg, rgb(255 255 255 / 82%), rgb(255 255 255 / 18%));
 }
 
 .step-card__number {
-  color: var(--color-orange);
+  color: rgb(255 255 255 / 74%);
   font-family: var(--font-heading);
   font-size: clamp(2.1rem, 4vw, 4.4rem);
   line-height: 0.9;
@@ -892,8 +938,8 @@
   position: relative;
   overflow: hidden;
   background:
-    linear-gradient(180deg, rgb(244 244 244 / 2%), rgb(244 244 244 / 6%)),
-    var(--color-brown);
+    radial-gradient(circle at 10% 96%, rgb(151 73 78 / 12%), transparent 22rem),
+    linear-gradient(180deg, rgb(244 244 244 / 2%), rgb(244 244 244 / 4%));
 }
 
 .industry-watermark {
@@ -927,7 +973,7 @@
   text-align: right;
 }
 
-.industries-head .section-label {
+.industries-head .section-kicker {
   margin-bottom: 0.95rem;
 }
 
@@ -949,10 +995,17 @@
   position: relative;
   overflow: hidden;
   background:
-    radial-gradient(circle at 14% 0%, rgb(255 255 255 / 7%), transparent 16rem),
-    radial-gradient(circle at 72% 24%, rgb(225 73 72 / 24%), transparent 24rem),
-    radial-gradient(circle at 82% 100%, rgb(227 75 58 / 42%), transparent 34rem),
-    linear-gradient(135deg, var(--bg-wine-800) 0%, var(--bg-wine-900) 58%, #250412 100%);
+    radial-gradient(circle at 18% 34%, rgb(255 255 255 / 4%), transparent 16rem),
+    radial-gradient(circle at 72% 42%, rgb(225 73 72 / 12%), transparent 24rem),
+    radial-gradient(circle at 82% 100%, rgb(227 75 58 / 18%), transparent 34rem),
+    linear-gradient(180deg, rgb(244 244 244 / 4%) 0%, rgb(244 244 244 / 2%) 22%, transparent 46%),
+    linear-gradient(
+      180deg,
+      var(--join-industry-cta) 0%,
+      var(--join-industry-cta) 22%,
+      color-mix(in srgb, var(--join-industry-cta) 52%, var(--join-cta-footer)) 62%,
+      var(--join-cta-footer) 100%
+    );
 }
 
 .cta-main {
@@ -1109,7 +1162,9 @@
 .site-footer {
   padding: clamp(1rem, 2vw, 1.5rem) clamp(1.2rem, 4vw, 3.5rem);
   border-top: 1px solid rgb(255 255 255 / 10%);
-  background: var(--bg-wine-900);
+  background:
+    radial-gradient(circle at 84% 0%, rgb(227 75 58 / 10%), transparent 18rem),
+    linear-gradient(180deg, var(--join-cta-footer) 0%, #1a0309 100%);
 }
 
 @keyframes logo-pulse {
@@ -1423,9 +1478,8 @@
   place-items: center;
   overflow: hidden;
   background:
-    radial-gradient(circle at 24% 20%, rgb(225 73 72 / 24%), transparent 24rem),
-    radial-gradient(circle at 78% 70%, rgb(227 75 58 / 22%), transparent 26rem),
-    linear-gradient(180deg, var(--bg-wine-900), var(--bg-wine-800));
+    radial-gradient(circle at 24% 20%, rgb(225 73 72 / 14%), transparent 24rem),
+    radial-gradient(circle at 78% 70%, rgb(227 75 58 / 12%), transparent 26rem);
 }
 
 .intro-copy {
@@ -1528,7 +1582,12 @@
   text-transform: uppercase;
 }
 
-.project-card .tech-chip,
+.project-card .tech-chip {
+  border-color: rgb(60 9 30 / 16%);
+  background: rgb(60 9 30 / 8%);
+  color: var(--color-brown);
+}
+
 .project-modal .tech-chip {
   border-color: rgb(60 9 30 / 16%);
   background: rgb(60 9 30 / 8%);
@@ -1652,10 +1711,9 @@
   position: relative;
   overflow: hidden;
   background:
-    radial-gradient(circle at 16% 0%, rgb(255 255 255 / 7%), transparent 16rem),
-    radial-gradient(circle at 72% 18%, rgb(175 98 103 / 30%), transparent 30rem),
-    radial-gradient(circle at 88% 86%, rgb(227 75 58 / 24%), transparent 31rem),
-    linear-gradient(135deg, var(--bg-wine-900) 0%, var(--bg-wine-800) 48%, var(--bg-wine-700) 100%);
+    radial-gradient(circle at 72% 18%, rgb(175 98 103 / 16%), transparent 30rem),
+    radial-gradient(circle at 88% 70%, rgb(227 75 58 / 10%), transparent 28rem),
+    linear-gradient(180deg, var(--join-hero-profile) 0%, var(--join-profile-steps) 100%);
 }
 
 .profile-grid {
@@ -1667,13 +1725,15 @@
   margin: 0 auto;
 }
 
-.profile-kicker {
+.profile-kicker,
+.section-kicker {
   margin-bottom: 0.45rem;
   color: var(--color-orange);
   font-family: var(--font-heading);
   font-size: clamp(1.6rem, 4vw, 4.8rem);
   letter-spacing: -0.05em;
   line-height: 0.95;
+  text-transform: uppercase;
 }
 
 .profile-copy h2 {
@@ -2148,7 +2208,8 @@
     font-size: clamp(3.1rem, 13vw, 5.1rem);
   }
 
-  .profile-kicker {
+  .profile-kicker,
+  .section-kicker {
     font-size: clamp(1.2rem, 7vw, 2.4rem);
   }
 }

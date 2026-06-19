@@ -76,8 +76,7 @@ export const copy = {
     },
     projects: {
       label: 'Projects',
-      titleA: 'explore',
-      titleB: 'recent work',
+      title: 'recent work',
       intro: 'A few selected projects, from idea to execution.<br />Drag to explore, click for details.',
       github: 'View GitHub',
       details: 'Details',
