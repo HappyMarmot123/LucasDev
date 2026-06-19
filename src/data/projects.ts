@@ -92,4 +92,30 @@ export const projects: Project[] = [
       },
     },
   },
+  {
+    id: 'pulse',
+    title: 'Pulse — Realtime Chat',
+    thumbnail: 'https://picsum.photos/seed/pulse/800/500', // DUMMY - replace later.
+    role: 'Solo',
+    period: '2024.09-2024.11',
+    tech: ['React Native', 'Firebase', 'TypeScript'],
+    summary: {
+      en: 'A cross-platform chat app with push notifications.',
+      ko: '푸시 알림을 갖춘 크로스플랫폼 채팅 앱.',
+    },
+    links: {
+      live: '#',
+      repo: '#',
+    },
+    detail: {
+      motivation: {
+        en: 'Wanted to explore realtime messaging on mobile.',
+        ko: '모바일에서 실시간 메시징을 탐구해 보고 싶었습니다.',
+      },
+      about: {
+        en: 'Firebase-backed messaging, presence indicators, and offline cache.',
+        ko: 'Firebase 기반 메시징, 접속 상태 표시, 오프라인 캐시.',
+      },
+    },
+  },
 ];

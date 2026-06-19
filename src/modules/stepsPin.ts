@@ -5,13 +5,13 @@ gsap.registerPlugin(ScrollTrigger);
 
 export function initStepsPin() {
   const section = document.querySelector<HTMLElement>('[data-steps-pin]');
-  const pin = section?.querySelector<HTMLElement>('.steps-pin-inner');
+  const grid = section?.querySelector<HTMLElement>('.steps-grid');
   const visual = section?.querySelector<HTMLElement>('[data-step-visual]');
   const visualNumber = visual?.querySelector<HTMLElement>('span');
   const visualTitle = visual?.querySelector<HTMLElement>('strong');
   const cards = Array.from(section?.querySelectorAll<HTMLElement>('[data-step]') ?? []);
 
-  if (!section || !pin || !visual || !visualNumber || !visualTitle || cards.length === 0) {
+  if (!section || !grid || !visual || !visualNumber || !visualTitle || cards.length === 0) {
     return;
   }
 
@@ -32,11 +32,12 @@ export function initStepsPin() {
   };
 
   ScrollTrigger.create({
-    trigger: section,
-    start: 'top top',
+    trigger: grid,
+    start: 'center center',
     end: () => `+=${window.innerHeight * (cards.length - 1.15)}`,
-    pin,
+    pin: grid,
     scrub: true,
+    markers: true,
     onUpdate: (self) => {
       const index = Math.min(cards.length - 1, Math.floor(self.progress * cards.length));
       setActive(index);

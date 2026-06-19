@@ -5,18 +5,19 @@ import { initHeroMotion } from './modules/heroMotion';
 import { initHeroScramble } from './modules/heroScramble';
 import { initIndustries } from './modules/industries';
 import { initMarquee } from './modules/marquee';
+import { initProfileCardMotion } from './modules/profileCardMotion';
 import { initProjectModal } from './modules/projectModal';
 import { initSmoothScroll } from './modules/smoothScroll';
 import { initStepsPin } from './modules/stepsPin';
 import { initTextReveal } from './modules/textReveal';
 import { copy, defaultLang, type Lang } from './i18n';
 
-type Card = { title: string; body: string };
 type Step = { number: string; eyebrow: string; title: string; body: string };
 
 const contact = {
   email: 'mdnsw28@gmail.com',
   github: 'https://github.com/HappyMarmot123',
+  linkedin: 'https://www.linkedin.com/',
 };
 
 function getLang(): Lang {
@@ -36,32 +37,6 @@ function logoMark() {
       <span>LUCAS KIM</span>
     </a>
   `;
-}
-
-function iconMarkup() {
-  return `
-    <span class="card-icon" aria-hidden="true">
-      <svg viewBox="0 0 48 48" role="img">
-        <path d="M24 4l17.3 10v20L24 44 6.7 34V14L24 4z" />
-        <path d="M15 25.5h18M24 14v20M15.8 16.4l16.4 15.2M32.2 16.4L15.8 31.6" />
-      </svg>
-    </span>
-  `;
-}
-
-function renderFeatureCards(cards: readonly Card[], className: string) {
-  return cards
-    .map(
-      (card, index) => `
-        <article class="${className}" data-reveal>
-          ${iconMarkup()}
-          <span class="card-kicker">${String(index + 1).padStart(2, '0')}</span>
-          <h3>${card.title}</h3>
-          <p>${card.body}</p>
-        </article>
-      `,
-    )
-    .join('');
 }
 
 function renderStepCards(steps: readonly Step[]) {
@@ -123,9 +98,89 @@ function renderProjectSlides() {
     .join('');
 }
 
+function renderProfileCard() {
+  return `
+    <div class="dashboard-wrap" data-reveal>
+      <div class="dashboard-mockup" data-profile-card aria-label="${t.about.label} profile summary" role="img">
+        <div class="dashboard-topbar">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+        <div class="dashboard-hero">
+          <div>
+            <span class="profile-name">김보준 / Kimbojun</span>
+            <div class="profile-years">
+              <strong>4</strong>
+              <p>${t.cta.metricLabel}</p>
+            </div>
+          </div>
+          <div class="profile-photo">
+            <img src="/mejpg.jpg" alt="Lucas Kim" />
+          </div>
+        </div>
+        <div class="profile-meta">
+			<span><small>Born</small>1999</span>
+			<span><small>Gender</small>Male</span>
+			<span><small>Location</small>Gangseo-gu, Seoul</span>
+        </div>
+        <div class="dashboard-bars">
+          <span style="--bar: 0%"></span>
+        </div>
+        <div class="dashboard-list">
+          ${t.about.cards.map((card) => `<span>${card.title}</span>`).join('')}
+        </div>
+      </div>
+    </div>
+  `;
+}
+
 function renderMarqueeItems() {
   const text = `${['Full Stack']}`;
   return Array.from({ length: 6 }, () => `<span>${text}</span>`).join('');
+}
+
+function githubIcon() {
+  return `
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 2C6.48 2 2 6.58 2 12.23c0 4.52 2.87 8.35 6.84 9.71.5.1.68-.22.68-.49v-1.9c-2.78.62-3.37-1.21-3.37-1.21-.45-1.19-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.9 1.56 2.35 1.11 2.92.85.09-.66.35-1.11.63-1.37-2.22-.26-4.55-1.14-4.55-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.27 2.75 1.05A9.25 9.25 0 0 1 12 6.94c.85 0 1.7.12 2.5.35 1.9-1.32 2.74-1.05 2.74-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.93-2.34 4.8-4.57 5.05.36.32.68.94.68 1.9v2.8c0 .27.18.59.69.49A10.04 10.04 0 0 0 22 12.23C22 6.58 17.52 2 12 2Z" />
+    </svg>
+  `;
+}
+
+function emailIcon() {
+  return `
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M4.5 6.25h15A2.5 2.5 0 0 1 22 8.75v6.5a2.5 2.5 0 0 1-2.5 2.5h-15A2.5 2.5 0 0 1 2 15.25v-6.5a2.5 2.5 0 0 1 2.5-2.5Zm.44 1.75 6.2 4.87a1.38 1.38 0 0 0 1.72 0L19.06 8H4.94Zm15.31 1.37-6.31 4.95a3.13 3.13 0 0 1-3.88 0L3.75 9.37v5.88c0 .41.34.75.75.75h15c.41 0 .75-.34.75-.75V9.37Z" />
+    </svg>
+  `;
+}
+
+function linkedinIcon() {
+  return `
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M5.34 8.98H2.42v12.44h2.92V8.98ZM3.88 3.18a1.7 1.7 0 1 0 0 3.4 1.7 1.7 0 0 0 0-3.4Zm8.58 5.8H9.66v12.44h2.86v-6.56c0-1.72.79-3 2.35-3 1.34 0 2.03.91 2.03 2.63v6.93h2.92v-7.37c0-3.36-1.78-5.25-4.43-5.25-1.7 0-2.62.82-3.07 1.47h-.04l.18-1.29Z" />
+    </svg>
+  `;
+}
+
+function renderContactActions() {
+  return `
+    <div class="contact-actions" data-reveal aria-label="Contact links">
+      <a class="contact-action" href="${contact.github}" target="_blank" rel="noreferrer" aria-label="Open GitHub">
+        ${githubIcon()}
+        <span>GitHub</span>
+      </a>
+      <a class="contact-action" href="mailto:${contact.email}" aria-label="Email Lucas Kim">
+        ${emailIcon()}
+        <span>Gmail</span>
+      </a>
+      <a class="contact-action" href="${contact.linkedin}" target="_blank" rel="noreferrer" aria-label="Open LinkedIn">
+        ${linkedinIcon()}
+        <span>LinkedIn</span>
+      </a>
+    </div>
+  `;
 }
 
 const app = document.querySelector<HTMLDivElement>('#app');
@@ -206,87 +261,19 @@ app.innerHTML = `
       </div>
     </section>
 
-    <section class="solais-section section-pad" aria-labelledby="solais-title">
-      <div class="solais-grid">
-        <div class="solais-copy">
-          <p class="solais-kicker" data-reveal>Analytics for</p>
-          <h2 id="solais-title" data-reveal>
-            <span>VISIBILITY</span>
-            <span>IN AI SEARCH</span>
+    <section class="profile-section section-pad" data-profile-motion aria-labelledby="profile-title">
+      <div class="profile-grid">
+        <div class="profile-copy">
+          <p class="profile-kicker" data-reveal>${t.about.label}</p>
+          <h2 id="profile-title" data-reveal>
+            <span>${t.about.titleA}</span>
+            <span>${t.about.titleB}</span>
           </h2>
-          <div class="solais-body" data-reveal>
-            <p>People don't search for information the way they used to. They ask questions, and AI answers. Solais shows how your brand appears within those answers, and how that visibility shifts over time.</p>
-            <p>It's clarity for a new kind of discovery.</p>
+          <div class="profile-body" data-reveal>
+            <p>${t.about.intro}</p>
           </div>
         </div>
-        <div class="dashboard-wrap" data-reveal>
-          <div class="dashboard-mockup" aria-label="Solais dashboard mockup" role="img">
-            <div class="dashboard-topbar">
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-            <div class="dashboard-hero">
-              <div>
-                <p>Visibility score</p>
-                <strong>84%</strong>
-              </div>
-              <div class="radial-chart"><span>AI</span></div>
-            </div>
-            <div class="dashboard-bars">
-              <span style="--bar: 88%"></span>
-              <span style="--bar: 64%"></span>
-              <span style="--bar: 76%"></span>
-              <span style="--bar: 52%"></span>
-            </div>
-            <div class="dashboard-list">
-              <span>ChatGPT</span>
-              <span>Google AI Overview</span>
-              <span>Claude</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="active-showcase section-pad" aria-labelledby="active-showcase-title">
-      <div class="active-showcase__noise grain-overlay" aria-hidden="true"></div>
-      <div class="accent-glow accent-glow--active" aria-hidden="true"></div>
-      <div class="active-showcase__copy" data-reveal>
-        <p>${t.active.body}</p>
-        <a class="showcase-button" href="mailto:${contact.email}">${t.active.button}</a>
-      </div>
-      <div class="active-showcase__metric" data-reveal>
-        <div class="showcase-label">
-          <span class="showcase-label__icon" aria-hidden="true">+</span>
-          <strong>${t.active.label}</strong>
-          <i></i><i></i><i></i>
-        </div>
-        <h2 id="active-showcase-title" data-count-to="4">${t.active.metric}</h2>
-      </div>
-      <div class="active-showcase__line" aria-hidden="true"></div>
-      <div class="active-showcase__items">
-        ${t.active.items
-          .map(
-            (item) => `
-              <article data-reveal>
-                <h3>${item.title}</h3>
-                <p>${item.body}</p>
-              </article>
-            `,
-          )
-          .join('')}
-      </div>
-    </section>
-
-    <section class="understanding-section section-pad" id="about" aria-labelledby="about-title">
-      <div class="section-heading">
-        <p class="section-label" data-reveal>${t.about.label}</p>
-        <h2 id="about-title" data-reveal><span>${t.about.titleA}</span><span>${t.about.titleB}</span></h2>
-        <p class="section-intro" data-reveal>${t.about.intro}</p>
-      </div>
-      <div class="feature-grid feature-grid--three">
-        ${renderFeatureCards(t.about.cards, 'feature-card')}
+        ${renderProfileCard()}
       </div>
     </section>
 
@@ -319,17 +306,17 @@ app.innerHTML = `
     <section class="industry-showcase section-pad" id="projects" aria-labelledby="projects-title">
       <div class="grain-overlay" aria-hidden="true"></div>
       <div class="accent-glow accent-glow--industry" aria-hidden="true"></div>
-      <div class="industry-showcase__blocks" aria-hidden="true">
-        <span>04</span><span>03</span><span>06</span><span>02</span>
-      </div>
-      <div class="industry-showcase__intro" data-reveal>
-        <p class="section-label">${t.projects.label}</p>
-        <h2 id="projects-title">
-          <span>${t.projects.titleA}</span>
-          ${t.projects.titleB ? `<span><b></b>${t.projects.titleB}</span>` : ''}
-        </h2>
-        <p>${t.projects.intro}</p>
-        <a class="showcase-button" href="${contact.github}" target="_blank" rel="noreferrer">${t.projects.github}</a>
+      <div class="industries-head">
+        <div class="section-heading" data-reveal>
+          <p class="section-label">${t.projects.label}</p>
+          <h2 id="projects-title">
+            <span>${t.projects.titleA}</span>
+            ${t.projects.titleB ? `<span>${t.projects.titleB}</span>` : ''}
+          </h2>
+          <div class="industries-copy">
+            <p>${t.projects.intro}</p>
+          </div>
+        </div>
       </div>
       <div class="swiper industry-showcase-swiper" aria-label="Projects carousel">
         <div class="swiper-wrapper">
@@ -342,48 +329,34 @@ app.innerHTML = `
       <div class="cta-main" data-reveal>
         <p class="section-label">${t.cta.label}</p>
         <h2 id="contact-title">${t.cta.title}</h2>
-        <p>${t.cta.body}</p>
-        <a class="showcase-button" href="mailto:${contact.email}">${t.cta.button}</a>
-      </div>
-      <div class="demo-card" data-reveal>
-        <div class="active-users">
-          <span>${t.cta.metricLabel}</span>
-          <strong data-count-to="4">4</strong>
+        <div class="cta-body">
+          <div>
+            <p>${t.cta.body}</p>
+          </div>
+          ${renderContactActions()}
         </div>
-        <h3>${t.cta.demoTitle}</h3>
-        <p>${t.cta.demoBody}</p>
-        <ol>
-          ${t.cta.points.map((point) => `<li><strong>${point.title}</strong><span>${point.body}</span></li>`).join('')}
-        </ol>
       </div>
       <div class="cta-wordmark" aria-hidden="true">LUCAS</div>
     </section>
   </main>
 
-  <footer class="site-footer section-pad">
-    <div class="footer-grid footer-grid--contact">
-      <div>
-        ${logoMark()}
-        <p class="footer-tagline">${t.footer.tagline}</p>
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span class="footer-copy">${t.footer.copyright}</span>
+      <div class="footer-contact" aria-label="Footer links">
+        <a href="${contact.github}" target="_blank" rel="noreferrer">
+          <span>GitHub</span>
+          <small>${contact.github}</small>
+        </a>
+        <a href="mailto:${contact.email}">
+          <span>Email</span>
+          <small>${contact.email}</small>
+        </a>
+        <a href="${contact.linkedin}" target="_blank" rel="noreferrer">
+          <span>LinkedIn</span>
+          <small>${contact.linkedin}</small>
+        </a>
       </div>
-      <div>
-        <h3>Explore</h3>
-        <nav class="footer-nav" aria-label="Footer navigation">
-          <a href="#about">${t.nav.about}</a>
-          <a href="#experience">${t.nav.experience}</a>
-          <a href="#projects">${t.nav.projects}</a>
-          <a href="#contact">${t.nav.contact}</a>
-        </nav>
-      </div>
-      <div class="footer-contact-links">
-        <h3>${t.footer.linksTitle}</h3>
-        <a href="mailto:${contact.email}">${t.footer.email}: ${contact.email}</a>
-        <a href="${contact.github}" target="_blank" rel="noreferrer">${t.footer.github}: HappyMarmot123</a>
-        <span aria-disabled="true">${t.footer.linkedin}</span>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span>${t.footer.copyright}</span>
     </div>
   </footer>
 
@@ -411,6 +384,7 @@ if (!reduce) {
   initTextReveal();
   initHeroMotion();
   initMarquee();
+  initProfileCardMotion();
   initStepsPin();
   initHeroScramble();
 } else {

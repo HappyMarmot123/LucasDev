@@ -51,6 +51,7 @@ export function initHeroScramble() {
       trigger: counter,
       start: 'top 86%',
       once: true,
+      markers: true,
       onEnter: () => {
         gsap.to(state, {
           value: target,

@@ -17,6 +17,7 @@ export function initTextReveal() {
           trigger: element,
           start: 'top 86%',
           once: true,
+          markers: true,
         },
       },
     );

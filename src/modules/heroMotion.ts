@@ -123,6 +123,7 @@ function initHeroSequence() {
       start: 'top top',
       end: 'bottom top',
       scrub: true,
+      markers: true,
     },
   });
 
@@ -133,73 +134,18 @@ function initHeroSequence() {
       start: 'top top',
       end: 'bottom top',
       scrub: true,
+      markers: true,
     },
   });
 
 }
 
 function initShowcaseMotion() {
-  const active = document.querySelector<HTMLElement>('.active-showcase');
   const industry = document.querySelector<HTMLElement>('.industry-showcase');
 
-  if (active) {
-    gsap.from('.showcase-label > *', {
-      scrollTrigger: { trigger: active, start: 'top 72%', once: true },
-      y: 26,
-      autoAlpha: 0,
-      duration: 0.62,
-      ease: 'power3.out',
-      stagger: 0.055,
-    });
-
-    gsap.from('.active-showcase__metric h2', {
-      scrollTrigger: { trigger: active, start: 'top 70%', once: true },
-      clipPath: 'inset(0 0 100% 0)',
-      scale: 0.92,
-      duration: 1.05,
-      ease: 'power4.out',
-    });
-
-    gsap.from('.active-showcase__line', {
-      scrollTrigger: { trigger: active, start: 'top 58%', once: true },
-      scaleX: 0,
-      transformOrigin: 'left center',
-      duration: 1.05,
-      ease: 'power3.out',
-    });
-
-    gsap.from('.active-showcase__items article', {
-      scrollTrigger: { trigger: active, start: 'top 52%', once: true },
-      y: 48,
-      autoAlpha: 0,
-      duration: 0.82,
-      ease: 'power3.out',
-      stagger: 0.12,
-    });
-
-    gsap.to('.active-showcase__metric', {
-      yPercent: -12,
-      scrollTrigger: {
-        trigger: active,
-        start: 'top bottom',
-        end: 'bottom top',
-        scrub: true,
-      },
-    });
-  }
-
   if (industry) {
-    gsap.from('.industry-showcase__intro h2 span, .industry-showcase__intro p, .industry-showcase__intro .showcase-button', {
-      scrollTrigger: { trigger: industry, start: 'top 74%', once: true },
-      y: 60,
-      autoAlpha: 0,
-      duration: 0.86,
-      ease: 'power3.out',
-      stagger: 0.09,
-    });
-
     gsap.from('.industry-show-card', {
-      scrollTrigger: { trigger: industry, start: 'top 66%', once: true },
+      scrollTrigger: { trigger: industry, start: 'top 66%', once: true, markers: true },
       x: 120,
       y: 34,
       rotate: 2,
@@ -207,16 +153,6 @@ function initShowcaseMotion() {
       duration: 0.9,
       ease: 'power3.out',
       stagger: 0.11,
-    });
-
-    gsap.to('.industry-showcase__blocks span', {
-      y: 'random(-38, 38)',
-      x: 'random(-18, 18)',
-      duration: 'random(3.2, 5.2)',
-      ease: 'sine.inOut',
-      repeat: -1,
-      yoyo: true,
-      stagger: 0.12,
     });
   }
 }
