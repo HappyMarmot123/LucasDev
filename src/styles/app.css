@@ -571,19 +571,6 @@
   display: block;
 }
 
-.hero-body {
-  position: absolute;
-  right: clamp(1.6rem, 2.7vw, 2.8rem);
-  bottom: clamp(2.5rem, 5vw, 4.7rem);
-  z-index: 4;
-  width: min(30rem, 36vw);
-  color: var(--color-brown);
-  font-family: var(--font-heading);
-  font-size: clamp(0.75rem, 0.82vw, 0.92rem);
-  letter-spacing: -0.035em;
-  line-height: 1.42;
-}
-
 .section-heading {
   width: min(100%, 108rem);
   margin: 0 auto clamp(2.4rem, 5vw, 5rem);
@@ -761,10 +748,11 @@
 .steps-section {
   position: relative;
   background:
+    radial-gradient(circle at 88% 0%, rgb(227 75 58 / 11%), transparent 34rem),
+    radial-gradient(circle at 70% 0%, rgb(175 98 103 / 10%), transparent 38rem),
     radial-gradient(circle at 18% 18%, rgb(255 255 255 / 4%), transparent 16rem),
-    radial-gradient(circle at 72% 28%, rgb(175 98 103 / 14%), transparent 28rem),
     radial-gradient(circle at 28% 100%, rgb(227 75 58 / 14%), transparent 29rem),
-    linear-gradient(180deg, var(--join-profile-steps) 0%, var(--join-steps-marquee) 100%);
+    linear-gradient(180deg, var(--join-profile-steps) 0%, var(--join-profile-steps) 18%, var(--join-steps-marquee) 100%);
 }
 
 .steps-pin-inner {
@@ -871,30 +859,57 @@
 .step-card::before {
   position: absolute;
   inset: 0 auto 0 0;
+  z-index: 2;
   width: 0.18rem;
   background: linear-gradient(180deg, rgb(255 255 255 / 36%), transparent);
   opacity: 1;
   content: '';
 }
 
-.step-card.is-active {
-  border-color: rgb(255 255 255 / 34%);
+.step-card::after {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
   background:
-    radial-gradient(circle at 18% 0%, rgb(255 255 255 / 16%), transparent 12rem),
-    linear-gradient(145deg, rgb(255 255 255 / 18%), rgb(255 255 255 / 7%)),
-    rgb(18 2 8 / 18%);
+    linear-gradient(115deg, transparent 0 46%, rgb(175 98 103 / 16%) 58%, transparent 72%),
+    radial-gradient(circle at 92% 12%, rgb(227 75 58 / 14%), transparent 15rem);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 220ms ease;
+  content: '';
+}
+
+.step-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+.step-card.is-active {
+  border-color: rgb(255 142 142 / 48%);
+  background:
+    radial-gradient(circle at 12% -8%, rgb(175 98 103 / 42%), transparent 15rem),
+    radial-gradient(circle at 96% 16%, rgb(227 75 58 / 20%), transparent 17rem),
+    linear-gradient(145deg, rgb(175 98 103 / 24%), rgb(255 255 255 / 8%)),
+    rgb(18 2 8 / 26%);
   box-shadow:
-    1rem 1.2rem 2.5rem rgb(18 2 8 / 22%),
-    -0.35rem -0.4rem 1.1rem rgb(255 255 255 / 8%),
+    1rem 1.2rem 2.7rem rgb(18 2 8 / 28%),
+    0 0 0 1px rgb(255 142 142 / 12%),
+    0 0 2.4rem rgb(175 98 103 / 18%),
+    -0.35rem -0.4rem 1.1rem rgb(255 142 142 / 10%),
     inset 0 1px 0 rgb(255 255 255 / 20%),
-    inset 0 -1px 0 rgb(60 9 30 / 28%);
+    inset 0 -1px 0 rgb(151 73 78 / 36%);
   opacity: 1;
   transform: translateX(-0.45rem) translateY(-0.12rem);
 }
 
 .step-card.is-active::before {
   width: 0.24rem;
-  background: linear-gradient(180deg, rgb(255 255 255 / 82%), rgb(255 255 255 / 18%));
+  background: linear-gradient(180deg, #ffb6b6 0%, var(--color-orange) 44%, rgb(227 75 58 / 72%) 100%);
+  box-shadow: 0 0 1.4rem rgb(175 98 103 / 48%);
+}
+
+.step-card.is-active::after {
+  opacity: 1;
 }
 
 .step-card__number {
@@ -902,6 +917,12 @@
   font-family: var(--font-heading);
   font-size: clamp(2.1rem, 4vw, 4.4rem);
   line-height: 0.9;
+}
+
+.step-card.is-active .step-card__number,
+.step-card.is-active .section-label {
+  color: #ffb6b6;
+  text-shadow: 0 0 1.15rem rgb(175 98 103 / 42%);
 }
 
 .marquee-band {
@@ -1345,14 +1366,6 @@
     bottom: 8rem;
   }
 
-  .hero-body {
-    right: auto;
-    left: 1rem;
-    bottom: 1.4rem;
-    width: calc(100% - 2rem);
-    color: rgb(255 255 255 / 78%);
-  }
-
   .industry-showcase {
     grid-template-columns: 1fr;
     min-height: auto;
@@ -1392,10 +1405,6 @@
 @media (max-width: 36rem) {
   .section-pad {
     padding-inline: 1rem;
-  }
-
-  .header-actions .button {
-    display: none;
   }
 
   .hero-copy h1,
@@ -1447,28 +1456,6 @@
     justify-content: flex-start;
     justify-self: start;
   }
-}
-
-/* Portfolio content pass */
-.lang-toggle {
-  display: inline-grid;
-  min-width: 2.8rem;
-  height: 2.7rem;
-  place-items: center;
-  border: 1px solid rgb(255 255 255 / 24%);
-  border-radius: 999px;
-  background: rgb(255 255 255 / 8%);
-  color: currentColor;
-  font-family: var(--font-heading);
-  font-size: 0.78rem;
-  text-transform: uppercase;
-  transition: background 180ms ease, color 180ms ease, transform 180ms ease;
-}
-
-.lang-toggle:hover {
-  background: var(--color-white);
-  color: var(--color-brown);
-  transform: translateY(-2px);
 }
 
 .intro-section {
@@ -1712,7 +1699,8 @@
   overflow: hidden;
   background:
     radial-gradient(circle at 72% 18%, rgb(175 98 103 / 16%), transparent 30rem),
-    radial-gradient(circle at 88% 70%, rgb(227 75 58 / 10%), transparent 28rem),
+    radial-gradient(circle at 88% 100%, rgb(227 75 58 / 11%), transparent 34rem),
+    radial-gradient(circle at 70% 100%, rgb(175 98 103 / 10%), transparent 38rem),
     linear-gradient(180deg, var(--join-hero-profile) 0%, var(--join-profile-steps) 100%);
 }
 
