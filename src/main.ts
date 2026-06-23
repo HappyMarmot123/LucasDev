@@ -10,7 +10,7 @@ import { initProjectModal } from './modules/projectModal';
 import { initSmoothScroll } from './modules/smoothScroll';
 import { initStepsPin } from './modules/stepsPin';
 import { initTextReveal } from './modules/textReveal';
-import { copy, defaultLang, type Lang } from './i18n';
+import { copy } from './i18n';
 
 type Step = { number: string; eyebrow: string; title: string; body: string };
 
@@ -20,11 +20,7 @@ const contact = {
   linkedin: 'https://www.linkedin.com/',
 };
 
-function getLang(): Lang {
-  return localStorage.getItem('lucasdev-lang') === 'ko' ? 'ko' : defaultLang;
-}
-
-const lang = getLang();
+const lang = 'en';
 const t = copy[lang];
 document.documentElement.lang = lang;
 
@@ -200,11 +196,6 @@ app.innerHTML = `
         <a href="#contact">${t.nav.contact}</a>
       </nav>
       <div class="header-actions">
-        <button class="lang-toggle" type="button" data-lang-toggle aria-label="Switch language">${lang === 'en' ? 'KO' : 'EN'}</button>
-        <a class="button button--small button--outline" href="mailto:${contact.email}">
-          <span>${t.nav.email}</span>
-          <span aria-hidden="true">↗</span>
-        </a>
         <button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" data-menu-toggle>
           <span></span>
           <span></span>
@@ -256,12 +247,9 @@ app.innerHTML = `
           <span><b></b>${t.hero.titleB}</span>
         </h1>
       </div>
-      <div class="hero-body">
-        <p>${t.hero.body}</p>
-      </div>
     </section>
 
-    <section class="profile-section section-pad" data-profile-motion aria-labelledby="profile-title">
+    <section class="profile-section section-pad" id="about" data-profile-motion aria-labelledby="profile-title">
       <div class="profile-grid">
         <div class="profile-copy">
           <p class="profile-kicker" data-reveal>${t.about.label}</p>
@@ -372,11 +360,6 @@ const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 initHeader();
 initIndustries();
 initProjectModal(projects, lang, t.modal);
-
-document.querySelector<HTMLButtonElement>('[data-lang-toggle]')?.addEventListener('click', () => {
-  localStorage.setItem('lucasdev-lang', lang === 'en' ? 'ko' : 'en');
-  window.location.reload();
-});
 
 if (!reduce) {
   initSmoothScroll();

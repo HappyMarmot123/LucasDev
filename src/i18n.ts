@@ -1,7 +1,5 @@
 export type Lang = 'en' | 'ko';
 
-export const defaultLang: Lang = 'en';
-
 export const copy = {
   en: {
     nav: {
@@ -20,7 +18,6 @@ export const copy = {
       kicker: 'Pleasure to Meet you',
       titleA: 'FULL-STACK',
       titleB: 'DEVELOPER',
-      body: 'Software Engineer · 4 years of experience and growing fast. I keep pace with vibe coding and the latest in AI, and I love building across the entire stack.',
     },
     about: {
       label: 'About',
@@ -131,7 +128,6 @@ export const copy = {
       kicker: '안녕하세요, 김보준입니다',
       titleA: '풀스택',
       titleB: '개발자',
-      body: '소프트웨어 엔지니어 · 빠르게 성장하는 4년 차. 바이브 코딩과 AI 최신 트렌드에 발맞추며, 스택 전반을 아우르는 개발을 좋아합니다.',
     },
     about: {
       label: '소개',
